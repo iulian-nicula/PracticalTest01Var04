@@ -2,6 +2,7 @@ package ro.pub.cs.systems.eim.practicaltest01var04;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,21 +14,19 @@ import android.widget.Toast;
 public class PracticalTest01Var04MainActivity extends AppCompatActivity {
     int checkbox1 = 0;
     int checkbox2 = 0;
-    String tb1;
-    String tb2;
 
-    public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
-            case R.id.checkBox:
-                if (checked) checkbox1 = 1;
-                else checkbox1 = 0;
-                break;
-            case R.id.checkBox2:
-                if (checked) checkbox2 = 1;
-                else checkbox2 = 0;
-                break;
+    private ButtonClickListener buttonClickListener = new ButtonClickListener();
+    private class ButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch(view.getId()) {
+                case R.id.button2:
+                    Intent intent = new Intent(getApplicationContext(), PracticalTest01Var04SecondaryActivity.class);
+                    startActivityForResult(intent, 0);
+                    break;
+            }
         }
+
     }
 
     @Override
@@ -69,6 +68,8 @@ public class PracticalTest01Var04MainActivity extends AppCompatActivity {
                 else checkbox2 = 0;
             }
         });
+        final Button secondarybutton = findViewById(R.id.button2);
+        secondarybutton.setOnClickListener(buttonClickListener);
 
         if (savedInstanceState != null) {
             EditText et1 = findViewById(R.id.editText);
@@ -97,5 +98,10 @@ public class PracticalTest01Var04MainActivity extends AppCompatActivity {
         String str2 = savedInstanceState.getString("mystring2");
         savedInstanceState.putString(str1, et1.getText().toString());
         savedInstanceState.putString(str2, et2.getText().toString());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Toast.makeText(this, "The activity returned with result " + resultCode, Toast.LENGTH_LONG).show();
     }
 }
