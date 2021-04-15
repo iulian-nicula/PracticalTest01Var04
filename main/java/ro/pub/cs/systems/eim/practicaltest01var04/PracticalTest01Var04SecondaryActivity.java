@@ -1,8 +1,10 @@
 package ro.pub.cs.systems.eim.practicaltest01var04;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,5 +34,12 @@ public class PracticalTest01Var04SecondaryActivity extends AppCompatActivity {
         Button cancel = findViewById(R.id.button4);
         ok.setOnClickListener(buttonClickListener);
         cancel.setOnClickListener(buttonClickListener);
+        /*Intent intent = getIntent();
+        if (intent != null && intent.getExtras().containsKey("tb1") && intent.getExtras().containsKey("tb2")) {
+            String str1 = intent.getStringExtra("tb1");
+            String str2 = intent.getStringExtra("tb2");
+            TextView tv1 = findViewById(R.id.textView);
+            TextView tv2 = findViewById(R.id.textView);
+        }*/
     }
 }
